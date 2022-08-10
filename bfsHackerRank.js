@@ -53,6 +53,7 @@ Sample Output
 6 6 -1
 -1 6
 */
+
 function processData(input) {
   //Enter your code here
   //console.log('input : ', input);
