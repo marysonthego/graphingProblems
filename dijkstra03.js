@@ -7,7 +7,7 @@ const parentMap = new Map();
 // valueMap map = node, calculated value
 // set starting node to 0
 const start = 0;
-const end = 4;
+const end = 5;
 const valueMap = new Map();
 valueMap.set(0, 0);
 valueMap.set(1, Number.MAX_VALUE);
@@ -106,6 +106,7 @@ while(visitedSet.size < valueMap.size) {
     }
 
     console.log('\nWhat is the shortest path from ' + start + ' to ' + end + '?');
+    console.log('convert parentMap to SPA - shortest path set');
     const spa = new Set();
     for (const entry of parentMap) {
       spa.add(entry[1])
