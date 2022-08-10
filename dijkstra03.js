@@ -5,6 +5,9 @@ const visitedSet = new Set();
 const parentMap = new Map();
 
 // valueMap map = node, calculated value
+// set starting node to 0
+const start = 0;
+const end = 4;
 const valueMap = new Map();
 valueMap.set(0, 0);
 valueMap.set(1, Number.MAX_VALUE);
@@ -20,8 +23,6 @@ graph.set(1, [[2,4], [0,1], [3,2], [4,7]]);
 graph.set(3, [[2,3], [1,2], [4,4], [5,6]]);
 graph.set(4, [[1,7], [2,5], [3,4], [5,7]]);
 graph.set(5, [[4,7], [3,6]]);
-
-const start = 0;
 
 const findSmallest = () => {
   const smallest = [-1, Number.MAX_VALUE];
@@ -87,24 +88,24 @@ while(visitedSet.size < valueMap.size) {
       //but we'll leave it there and just skip any nodes in the valueMap that
       //are in the visitedSet
     }
-    console.log('What is in the visitedSet?');
+    console.log('\nWhat is in the visitedSet?');
     for(const entry of visitedSet) {
       console.log(entry);
     }
 
     //list the valueMap
-    console.log('What is in the valueMap?');
-    console.log('What is the shortest path from 0 to any other node?');
+    console.log('\nWhat is in the valueMap?');
+    console.log('What is the shortest path from ' + start + ' to any other node?');
     for (const entry of valueMap) {
       console.log(entry);
     }
 
-    console.log('What is in the parentMap?');
+    console.log('\nWhat is in the parentMap?');
     for (const entry of parentMap) {
       console.log(entry);
     }
 
-    console.log('What is the shortest path from 0 to 5?');
+    console.log('\nWhat is the shortest path from ' + start + ' to ' + end + '?');
     const spa = new Set();
     for (const entry of parentMap) {
       spa.add(entry[1])
