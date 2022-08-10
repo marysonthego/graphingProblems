@@ -41,7 +41,7 @@ const findSmallest = () => {
 
 while(visitedSet.size < valueMap.size) {
   //Step 1
-  //Find the node with the smallest valueMap not in visitedSet
+  //Find the node with the smallest valueMap value that's not in the visitedSet
 
   const current = findSmallest();
   console.log('While current ' + current);
@@ -65,19 +65,27 @@ while(visitedSet.size < valueMap.size) {
       console.log('Step 2 current ' + current);
       graph.get(current[0]).forEach(neighbor => {
         console.log('Step 2 forEach neighbor ' + neighbor);
+        //if neighbor is not in visitedSet
         if(!visitedSet.has(neighbor[0])) {
+          //calculate the new valueMap value for neighbor
           const newValue = valueMap.get(current[0]) + neighbor[1];
           console.log('Step 2 newValue ' + newValue);
+          //if the new value is < the neighbor's current value
           if(newValue < valueMap.get(neighbor[0])) {
+            //update the neighbor's value with the new value
             valueMap.set(neighbor[0], newValue);
             parentMap.set(neighbor[0], current[0]);
           }
         }
       })
       //all neighbors have been updated or skipped
+
       //Step 3
-      //add current to visitedSet
+      //add current to visitedSet because all its neighbors have been processed
       visitedSet.add(current[0]);
+      //we could also delete current from the valueMap here,
+      //but we'll leave it there and just skip any nodes in the valueMap that
+      //are in the visitedSet
     }
     console.log('What is in the visitedSet?');
     for(const entry of visitedSet) {
