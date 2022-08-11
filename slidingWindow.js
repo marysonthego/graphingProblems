@@ -16,51 +16,45 @@ list = [1, 9, 8, 2, 4]  n = 4 result = 23
 
 const maxConsecutiveSubsetSum = (n, list) => {
   let result = -1;
-  let maxSum = baseline = 0;
+  let maxSum = 0;
   let s2 = s1 = 0;
 
-  if (list.length < n ) {
-    result =  'invalid subset size';
-    return result;
+  if (list.length <= n ) {
+    return 'subset size of ' + n + ' must be less than list size of ' + list.length;
   } else if (n === 0) {
-    result = list[0];
-    return result;
-  } else if (list.length === n) {
-    result = 'subset size of ' + n + ' must be less than list size of ' + list.length;
-    return result;
+    return list[0];
   }
+
   for (let s1=0; s1 < list.length; s1++) {
     s2 = s1 + n;
-
-    // baseline = sum of first n elements
+    // temp is the baseline sum of the first n elements
     let temp = 0;
     list.slice(s1, s2).forEach((subItem) => {
       temp += subItem;
     })
-    if (baseline < temp) {
-      baseline = temp;
-    }
-    if (baseline > maxSum) {
-        maxSum = baseline;
-        result = maxSum;
-    }
-    //console.log('s1 ' + s1 + ' s2 ' + s2, ' maxSum ' + maxSum + ' baseline ' + baseline);
+    if (maxSum < temp) maxSum = temp;
   };
+  return maxSum;
 
-  // while (s2 < list.length) {
-  //   tempSum = tempSum - list[s1] + list[s2];
-  //   if (tempSum > maxSum) {
-  //     maxSum = tempSum;
-  //   }
-  //   s1++;
-  //   s2++;
+  //alternative solution
+  // let maxSum = 0;
+  // for (let i=0; i < n; i++) {
+  //   maxSum += list[i];
+  // }
+  // let p1 = 0;
+  // let p2 = n;
+  // let tempSum = maxSum;
+  // while (p2 < list.length) {
+  //   tempSum = tempSum - list[p1] + list[p2];
+  //   if (tempSum > maxSum) maxSum = tempSum;
+  //   p1++;
+  //   p2++;
   // }
   // return maxSum;
 };
 
 const list = [1, 9, 8, 2, 4];
-
+console.log('[1, 9, 8, 2, 4]');
 for(let n=0; n<6; n++) {
-  console.log('n = ' + n);
-  console.log('maxConsecutiveSubsetSum ' + maxConsecutiveSubsetSum(n, list));
+  console.log('n = ' + n + ' maxConsecutiveSubsetSum = ' + maxConsecutiveSubsetSum(n, list));
 }
